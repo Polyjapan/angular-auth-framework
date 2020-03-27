@@ -34,6 +34,7 @@ export class TokensmanagerModule {
     }
 
     static forRoot(options: TokensManagerModuleOptions): ModuleWithProviders<TokensmanagerModule> {
+
         return {
             ngModule: TokensmanagerModule,
             providers: [
@@ -46,11 +47,6 @@ export class TokensmanagerModule {
                 {
                     provide: AUTH_API_OPTIONS,
                     useValue: options
-                },
-
-                {
-                    provide: JwtHelperService,
-                    useValue: new JwtHelperService()
                 },
 
                 AuthApiService,

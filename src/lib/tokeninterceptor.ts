@@ -104,7 +104,7 @@ export class TokenInterceptor implements HttpInterceptor {
         if (token && this.jwtHelper.isTokenExpired(token, -10)) {
             // Try to refresh the token
             // If this doesn't work (401 error or anything), the session will be invalidated
-            this.tokens.refreshToken().pipe(mergeMap(success => {
+            return this.tokens.refreshToken().pipe(mergeMap(success => {
                 let newToken = null;
                 if (success) {
                     newToken = this.tokens.getRawAccessToken();
