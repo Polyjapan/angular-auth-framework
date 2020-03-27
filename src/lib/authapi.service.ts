@@ -6,6 +6,7 @@ import {AUTH_API_OPTIONS} from "./authapioptions.tokens";
 import {TokensManagerModuleOptions} from "./tokensmanager.module";
 import {Observable} from "rxjs";
 import {TokenResponse} from "./tokenresponse";
+import {UserProfile} from "./user";
 
 
 @Injectable()
@@ -41,10 +42,10 @@ export class AuthApiService {
     }
 
     refreshToken(refreshToken: string): Observable<TokenResponse> {
-      return this.http.get<TokenResponse>(refreshToken.replace(':token', refreshToken));
+      return this.http.get<TokenResponse>(this.refreshUrl.replace(':token', refreshToken));
     }
 
-    getCurrentUser(refreshToken: string): Observable<TokenResponse> {
-      return this.http.get<TokenResponse>(refreshToken.replace(':token', refreshToken));
+    getCurrentUser(): Observable<UserProfile> {
+      return this.http.get<UserProfile>(this.profileUrl);
     }
 }
