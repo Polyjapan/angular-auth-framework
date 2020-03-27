@@ -4,11 +4,9 @@ import {of as observableOf, AsyncSubject, Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 
-import {ApiResult} from '../types/api_result';
-import {BackendService} from './backend.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import {Router} from '@angular/router';
 import {AuthApiService} from "./authapi.service";
+import {AccessToken, TokenResponse} from "./tokenresponse";
 
 @Injectable()
 export class TokenStorageService {
@@ -19,7 +17,7 @@ export class TokenStorageService {
 
   private refresh: AsyncSubject<boolean> = undefined;
 
-  constructor(private api: AuthApiService, private route: Router) {
+  constructor(private api: AuthApiService) {
 
   }
 

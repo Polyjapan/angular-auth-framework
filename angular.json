@@ -1,0 +1,24 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "projects": {
+    "aangular-auth-framework2": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "library",
+      "prefix": "",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "project": "ng-package.json"
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "angular-auth-framework",
+  "cli": {
+    "analytics": false
+  }
+}
