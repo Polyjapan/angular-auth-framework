@@ -1,0 +1,22 @@
+{
+  "name": "@japanimpact/angular-auth-framework",
+  "version": "1.0.2",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "keywords": [],
+  "author": "Louis Vialar",
+  "license": "ISC",
+  "dependencies": {
+    "@angular/core": "^8.2.14",
+    "@angular/common": "^8.2.14",
+    "@auth0/angular-jwt": "^3.0.1",
+    "rxjs": "^6.5.4",
+    "tslib": "^1.10.0"
+  },
+  "devDependencies": {
+    "typescript": "~3.5.3"
+  }
+}
