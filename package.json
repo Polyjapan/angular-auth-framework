@@ -1,12 +1,12 @@
 {
   "name": "@japanimpact/angular-auth-framework",
-  "version": "1.0.7",
+  "version": "1.0.15",
   "description": "",
   "main": "dist/index.d.ts",
   "scripts": {
-    "build": "ng build angular-auth-framework --prod"
+    "build": "ng build angular-auth-framework --prod",
+    "deploy": "ng build && cd dist && npm publish"
   },
-  "files": ["dist/**"],
   "keywords": [],
   "author": "Louis Vialar",
   "license": "ISC",

@@ -6,7 +6,7 @@ import {TokenStorageService} from "./tokenstorage.service";
 import {parse} from 'url';
 import {Observable} from "rxjs";
 import {TokensManagerModuleOptions} from "./tokensmanager.module";
-import {catchError, mergeMap} from "rxjs/operators";
+import {catchError, flatMap, mergeMap} from "rxjs/operators";
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -77,7 +77,7 @@ export class TokenInterceptor implements HttpInterceptor {
                         // Refresh the token before giving up
                         console.log('Warn: endpoint returned 401 - trying to refresh the token')
 
-                        return this.tokens.refreshToken().pipe(mergeMap(success => {
+                        return this.tokens.refreshToken().pipe(flatMap(success => {
                             let newToken = null;
                             if (success) {
                                 newToken = this.tokens.getRawAccessToken();

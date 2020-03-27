@@ -22,6 +22,9 @@ export class TokenStorageService {
   }
 
   login(accessToken: string, refreshToken: string) {
+    if (this.jwtHelper.isTokenExpired(accessToken)) {
+      throw new Error('Token is already expired');
+    }
 
     localStorage.setItem(TokenStorageService.REFRESH_TOKEN_KEY, refreshToken);
     localStorage.setItem(TokenStorageService.ACCESS_TOKEN_KEY, accessToken);

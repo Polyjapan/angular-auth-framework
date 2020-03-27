@@ -15,6 +15,8 @@ export class AuthApiService {
     private apiKey: string;
     private refreshUrl: string;
     private profileUrl: string;
+    public readonly loginUrl: string;
+    public readonly registerUrl: string;
 
     constructor(private http: HttpClient, @Inject(AUTH_API_OPTIONS) config: TokensManagerModuleOptions) {
         this.baseApiUrl = config.authApiDomain;
@@ -23,29 +25,17 @@ export class AuthApiService {
 
         this.apiKey = config.authApiKey;
 
-        this._loginUrl = this.baseApiUrl + (config.loginPath ? config.loginPath : '/login');
+        this.loginUrl = this.baseApiUrl + (config.loginPath ? config.loginPath : '/login') + '?app=' + this.apiKey + '&tokenType=token';
         this.profileUrl = this.baseApiUrl + (config.profilePath ? config.profilePath : '/api/user/');
-        this._registerUrl = this.baseApiUrl + (config.loginPath ? config.loginPath : '/register');
+        this.registerUrl = this.baseApiUrl + (config.loginPath ? config.loginPath : '/register') + '?app=' + this.apiKey + '&tokenType=token';
         this.refreshUrl = this.baseApiUrl + (config.loginPath ? config.loginPath : '/api/refresh/:token');
     }
 
-    private _loginUrl: string;
-
-    get loginUrl() {
-        return this._loginUrl + '?app=' + this.apiKey + '&tokenType=token';
-    }
-
-    private _registerUrl: string;
-
-    get registerUrl() {
-        return this._registerUrl + '?app=' + this.apiKey + '&tokenType=token';
-    }
-
     refreshToken(refreshToken: string): Observable<TokenResponse> {
-      return this.http.get<TokenResponse>(this.refreshUrl.replace(':token', refreshToken));
+        return this.http.get<TokenResponse>(this.refreshUrl.replace(':token', refreshToken));
     }
 
     getCurrentUser(): Observable<UserProfile> {
-      return this.http.get<UserProfile>(this.profileUrl);
+        return this.http.get<UserProfile>(this.profileUrl);
     }
 }

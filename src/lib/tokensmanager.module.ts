@@ -4,6 +4,7 @@ import {AUTH_API_OPTIONS} from "./authapioptions.tokens";
 import {TokenInterceptor} from "./tokeninterceptor";
 import {AuthApiService} from "./authapi.service";
 import {TokenStorageService} from "./tokenstorage.service";
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 export interface TokensManagerModuleOptions {
     whitelistedDomains?: Array<string | RegExp>;
@@ -45,6 +46,11 @@ export class TokensmanagerModule {
                 {
                     provide: AUTH_API_OPTIONS,
                     useValue: options
+                },
+
+                {
+                    provide: JwtHelperService,
+                    useValue: new JwtHelperService()
                 },
 
                 AuthApiService,
