@@ -12,23 +12,22 @@ import {UserProfile} from "./user";
 @Injectable()
 export class AuthApiService {
     private baseApiUrl: string;
-    private apiKey: string;
     private refreshUrl: string;
     private profileUrl: string;
-    public readonly loginUrl: string;
-    public readonly registerUrl: string;
+    private loginUrl: string;
 
     constructor(private http: HttpClient, @Inject(AUTH_API_OPTIONS) config: TokensManagerModuleOptions) {
         this.baseApiUrl = config.authApiDomain;
         if (!this.baseApiUrl.startsWith('http')) this.baseApiUrl = 'https://' + this.baseApiUrl;
         if (this.baseApiUrl.endsWith('/')) this.baseApiUrl.substr(0, this.baseApiUrl.length - 1);
 
-        this.apiKey = config.authApiKey;
-
-        this.loginUrl = this.baseApiUrl + (config.loginPath ? config.loginPath : '/login') + '?app=' + this.apiKey + '&tokenType=token';
+        this.loginUrl = this.baseApiUrl + (config.loginPath ? config.loginPath : '/internal/login') + '?service=:callback';
         this.profileUrl = this.baseApiUrl + (config.profilePath ? config.profilePath : '/api/user/');
-        this.registerUrl = this.baseApiUrl + (config.loginPath ? config.loginPath : '/register') + '?app=' + this.apiKey + '&tokenType=token';
         this.refreshUrl = this.baseApiUrl + (config.loginPath ? config.loginPath : '/api/refresh/:token');
+    }
+
+    getLoginUrl(callbackUrl: string) {
+        return this.loginUrl.replace(':callback', callbackUrl);
     }
 
     refreshToken(refreshToken: string): Observable<TokenResponse> {

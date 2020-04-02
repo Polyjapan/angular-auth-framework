@@ -29,7 +29,7 @@ export class TokenInterceptor implements HttpInterceptor {
         if (baseApiUrl.endsWith('/')) baseApiUrl.substr(0, baseApiUrl.length - 1);
 
         this.whitelistedDomains.push(baseApiUrl);
-        this.blacklistedRoutes.push(new RegExp((baseApiUrl + (config.loginPath ? config.loginPath : '/api/refresh/:token')).replace(':token', '[a-zA-Z0-9_=-]+')))
+        this.blacklistedRoutes.push(new RegExp((baseApiUrl + (config.loginPath ? config.loginPath : '/internal/refresh/:token')).replace(':token', '[a-zA-Z0-9_=-]+')))
     }
 
     // Copied from https://github.com/auth0/angular2-jwt/blob/master/projects/angular-jwt/src/lib/jwt.interceptor.ts (MIT License)
