@@ -1,6 +1,6 @@
 {
   "name": "@japanimpact/angular-auth-framework",
-  "version": "1.0.21",
+  "version": "1.1.0",
   "description": "",
   "main": "dist/index.d.ts",
   "scripts": {

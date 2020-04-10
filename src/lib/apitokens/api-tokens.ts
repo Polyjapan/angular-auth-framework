@@ -29,12 +29,14 @@ export function containsScope(scope: string, scopes: string[]) {
     if (scopes.includes(scope)) {
         return true;
     } else {
-        const parts = scope.split("/").map(part => part + "/");
+        const parts = scope.split("/").map(part => part + "/"); // [admin/, access/]
         const joined = [""];
 
+        // ["", "admin/", "admin/access/"]
         parts.forEach((part, index) => joined.push(joined[index] + part)); // equiv to scanLeft
+        joined.splice(joined.length - 1, 1);
 
-        return joined.splice(joined.length - 1, 1).map(path => path + '*')
+        return joined.map(path => path + '*')
             .some(starPath => scopes.includes(starPath));
     }
 }
